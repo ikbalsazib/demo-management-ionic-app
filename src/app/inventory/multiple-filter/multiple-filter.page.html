@@ -1,0 +1,192 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Multiple Filter</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+  <ion-content>
+
+    <div class="header"  fxLayout="column" fxLayoutAlign="center start" >
+      <div class="filter-area" fxFlex>
+        <ion-button (click)="onClickFilter()">
+          <ion-icon slot="start" name="options"></ion-icon>
+          Multiple Filter
+        </ion-button>
+      </div>
+
+      <div class="view-area ion-align-self-center" fxFlex *ngIf="isMultipleFilter">
+        <ion-card>
+          <ion-card-header>
+            <h1 class="ion-text-center">Choose Multiple Filter Option</h1>
+          </ion-card-header>
+
+          <ion-card-content>
+            <form class="example-form">
+
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="4">
+                    <div class="ng-autocomplete">
+                      <!--          historyIdentifier="productLists"-->
+                      <ng-autocomplete #auto1
+                                       debounceTime="100"
+                                       [data]="productLists | uniqueBrand"
+                                       [searchKeyword]="itemBrandKeyword"
+                                       placeHolder="Select Brand.."
+                                       (selected)='selectBrandEvent($event)'
+                                       (inputChanged)="onItemBrandChange($event)"
+                                       (inputCleared)="onItemBrandClear()"
+                                       [itemTemplate]="itemBrandTemplate"
+                                       [notFoundTemplate]="notFoundTemplate">
+                      </ng-autocomplete>
+
+                      <ng-template #itemBrandTemplate let-item>
+                        <a [innerHTML]="item.brand"></a>
+                      </ng-template>
+
+                      <ng-template #notFoundTemplate let-notFound>
+                        <div [innerHTML]="notFound"></div>
+                      </ng-template>
+                    </div>
+                  </ion-col>
+
+                  <ion-col size="4">
+                    <div class="ng-autocomplete">
+                      <ng-autocomplete #auto2
+                                       [data]="brandBaseProductLists | uniqueModel"
+                                       [searchKeyword]="itemModelKeyword"
+                                       (selected)='selectModelEvent($event)'
+                                       (inputCleared)="onItemModelClear()"
+                                       placeHolder="Select Model.."
+                                       (inputChanged)="onItemModelChange($event)"
+                                       [itemTemplate]="itemModelTemplate">
+                      </ng-autocomplete>
+
+                      <ng-template #itemModelTemplate let-item>
+                        <a [innerHTML]="item.model"></a>
+                      </ng-template>
+
+                      <ng-template #notFoundTemplate let-notFound>
+                        <div [innerHTML]="notFound"></div>
+                      </ng-template>
+                    </div>
+
+                  </ion-col>
+
+                  <ion-col size="4">
+                    <div class="ng-autocomplete">
+                      <!--          historyIdentifier="productLists"-->
+                      <ng-autocomplete #auto3
+                                       [data]="brandModelBaseProductLists | uniqueColor"
+                                       [searchKeyword]="itemColorKeyword"
+                                       (selected)='selectColorEvent($event)'
+                                       (inputCleared)="onItemColorClear()"
+                                       placeHolder="Select Color.."
+                                       (inputChanged)="onItemColorChange($event)"
+                                       [itemTemplate]="itemColorTemplate">
+                      </ng-autocomplete>
+
+                      <ng-template #itemColorTemplate let-item>
+                        <a [innerHTML]="item.color"></a>
+                      </ng-template>
+
+                      <ng-template #notFoundTemplate let-notFound>
+                        <div [innerHTML]="notFound"></div>
+                      </ng-template>
+                    </div>
+                  </ion-col>
+
+                </ion-row>
+              </ion-grid>
+            </form>
+          </ion-card-content>
+        </ion-card>
+      </div>
+
+    </div>
+    <div class="container">
+      <table mat-table matSort [dataSource]="listData" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="sl">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> SL</th>
+          <td style="font-weight: 600; color: #E23237" mat-cell *matCellDef="let element; let i = index;"> {{i + 1}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="brand">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Brand</th>
+          <td mat-cell *matCellDef="let element"> {{element.brand}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="model">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Model </th>
+          <td mat-cell *matCellDef="let element"> {{element.model}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="cc">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> CC </th>
+          <td mat-cell *matCellDef="let element"> {{element.cc}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="color">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Color </th>
+          <td mat-cell *matCellDef="let element"> {{element.color}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="engine">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Seat Cap </th>
+          <td mat-cell *matCellDef="let element">{{element.engine}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="chassis">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Fuel Type</th>
+          <!--        <td mat-cell *matCellDef="let element"> {{getQuantity(element._id)}}</td>-->
+          <td mat-cell *matCellDef="let element"> {{element.chassis }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="lc">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Boot Space </th>
+          <td mat-cell *matCellDef="let element"> {{element.lc}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="receivedDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Received Date </th>
+          <td mat-cell *matCellDef="let element">{{element.receivedDate | date}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="costPrice">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Cost Price</th>
+          <!--        <td mat-cell *matCellDef="let element"> {{getQuantity(element._id)}}</td>-->
+          <td mat-cell *matCellDef="let element"> ৳ {{element.costPrice | number : '1.2-2'}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="unitPrice">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Unit Price</th>
+          <!--        <td mat-cell *matCellDef="let element"> {{getQuantity(element._id)}}</td>-->
+          <td mat-cell *matCellDef="let element"> ৳ {{element.unitPrice | number : '1.2-2'}}</td>
+        </ng-container>
+
+
+        <!--Extra-->
+        <ng-container matColumnDef="loading">
+          <th mat-footer-cell *matFooterCellDef colspan="8">
+            Loading data...
+          </th>
+        </ng-container>
+
+        <ng-container matColumnDef="noData">
+          <th mat-footer-cell *matFooterCellDef colspan="8">
+            No data.
+          </th>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-footer-row *matFooterRowDef="['loading']" class="table-footer-loading" [ngClass]="{'hide':listData!=null}"></tr>
+        <tr mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></tr>
+      </table>
+    </div>
+  </ion-content>
+

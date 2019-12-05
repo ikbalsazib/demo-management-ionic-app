@@ -17,7 +17,7 @@
     "max-classes-per-file": false,
     "max-line-length": [
       true,
-      140
+      500
     ],
     "member-access": false,
     "member-ordering": [
@@ -50,6 +50,7 @@
     "no-switch-case-fall-through": true,
     "no-use-before-declare": true,
     "no-var-requires": false,
+    "no-trailing-whitespace": false,
     "object-literal-key-quotes": [
       true,
       "as-needed"

@@ -10,18 +10,77 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+
   public appPages = [
     {
-      title: 'Home',
-      url: '/home',
+      title: 'Dashboard',
+      url: '/dashboard',
       icon: 'home'
     },
     {
-      title: 'List',
-      url: '/list',
+      title: 'Purchase',
+      url: '/purchase',
+      icon: 'add-circle'
+    },
+    {
+      title: 'Sales',
+      url: '/sale',
+      icon: 'cart',
+    },
+    {
+      title: 'Inventory',
+      url: 'inventory',
+      icon: 'filing'
+    },
+    {
+      title: 'Reports',
+      icon: 'podium',
+      children: [
+        {
+          title: 'LC Register',
+          url: '/a',
+          icon: 'home'
+        },
+        {
+          title: 'Vendor Wise LC Register',
+          url: '/a',
+          icon: 'list'
+        },
+        {
+          title: 'LC Wise Purchase',
+          url: '/a',
+          icon: 'home'
+        },
+        {
+          title: 'LC Wise Sales',
+          url: '/a',
+          icon: 'list'
+        },
+      ]
+    },
+    {
+      title: 'Accounting',
+      icon: 'pie'
+    },
+    {
+      title: 'BRTA Related',
+      url: '/brta',
+      icon: 'home'
+    },
+    {
+      title: 'Payroll',
+      url: '/payroll',
       icon: 'list'
+    },
+    {
+      title: 'About',
+      url: '/about',
+      icon: 'logo-ionic'
     }
   ];
+
+
+
 
   constructor(
     private platform: Platform,

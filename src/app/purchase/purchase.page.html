@@ -1,0 +1,120 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-menu-button></ion-menu-button>
+      <ion-title>Purchase Item</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div class="container">
+  <ion-card>
+    <ion-card-content>
+      <form [formGroup]="purchaseForm" (ngSubmit)="onPurchaseSubmit()" #formDirective="ngForm">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="3">
+              <mat-form-field class="my-mat-form-field">
+                <input type="text" placeholder="Brand" aria-label="Number" matInput [formControl]="brand" [matAutocomplete]="brandAuto">
+                <mat-autocomplete #brandAuto="matAutocomplete" (optionSelected)="onSelect($event)">
+                  <mat-option *ngFor="let item of filteredBrandItems | async | uniqueBrand" [value]="item.brand" (click)="selectionMade($event)">
+                    {{item.brand}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </ion-col>
+
+            <ion-col size="3">
+              <mat-form-field class="my-mat-form-field">
+                <input type="text" placeholder="Model" aria-label="Number" matInput [formControl]="model" [matAutocomplete]="modelAuto">
+                <mat-autocomplete #modelAuto="matAutocomplete" (optionSelected)="onSelect($event)">
+                  <mat-option *ngFor="let item of filteredModelItems | async | uniqueModel" [value]="item.model" (click)="selectionMade($event)">
+                    {{item.model}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </ion-col>
+
+            <ion-col size="3">
+              <mat-form-field class="my-mat-form-field">
+                <input type="text" placeholder="CC" aria-label="Number" matInput [formControl]="cc" [matAutocomplete]="ccAuto">
+                <mat-autocomplete #ccAuto="matAutocomplete" (optionSelected)="onSelect($event)">
+                  <mat-option *ngFor="let item of filteredCcItems | async | uniqueCc" [value]="item.cc" (click)="selectionMade($event)">
+                    {{item.cc}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </ion-col>
+
+            <ion-col size="3">
+              <mat-form-field class="my-mat-form-field">
+                <input type="text" placeholder=" Color" aria-label="Number" matInput [formControl]="color" [matAutocomplete]="colorAuto">
+                <mat-autocomplete #colorAuto="matAutocomplete" (optionSelected)="onSelect($event)">
+                  <mat-option *ngFor="let item of filteredColorItems | async | uniqueColor" [value]="item.color" (click)="selectionMade($event)">
+                    {{item.color}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </ion-col>
+            <ion-col size="3">
+              <mat-form-field class="my-mat-form-field">
+                <input type="text" placeholder="Seat Cap." aria-label="Number" matInput [formControl]="engine">
+              </mat-form-field>
+            </ion-col>
+
+            <ion-col size="3">
+              <mat-form-field class="my-mat-form-field">
+                <input type="text" placeholder="Fuel Type" aria-label="Number" matInput [formControl]="chassis">
+              </mat-form-field>
+            </ion-col>
+
+            <ion-col size="3">
+              <mat-form-field class="my-mat-form-field">
+                <input type="text" placeholder="BHP" aria-label="Number" matInput [formControl]="lc">
+              </mat-form-field>
+            </ion-col>
+
+            <ion-col size="3">
+
+              <mat-form-field>
+                <input [formControl]="receivedDate" matInput [matDatepicker]="picker" placeholder="Date.."  aria-label="Number">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </ion-col>
+
+            <ion-col size="3">
+              <mat-form-field class="my-mat-form-field">
+                <input type="number" placeholder="  Cost Price" aria-label="Number" matInput [formControl]="costPrice" [matAutocomplete]="costPriceAuto">
+                <mat-autocomplete #costPriceAuto="matAutocomplete" (optionSelected)="onSelect($event)">
+                  <mat-option *ngFor="let item of filteredCostPriceItems | async | uniqueCostPrice" [value]="item.costPrice" (click)="selectionMade($event)">
+                    {{item.costPrice}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </ion-col>
+
+            <ion-col size="3">
+              <mat-form-field class="my-mat-form-field">
+                <input type="number" placeholder="Unit Price" aria-label="Number" matInput [formControl]="unitPrice" [matAutocomplete]="unitPriceAuto">
+                <mat-autocomplete #unitPriceAuto="matAutocomplete" (optionSelected)="onSelect($event)">
+                  <mat-option *ngFor="let item of filteredUnitPriceItems | async | uniqueUnitPrice" [value]="item.unitPrice" (click)="selectionMade($event)">
+                    {{item.unitPrice}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </ion-col>
+
+          </ion-row>
+        </ion-grid>
+
+        <div class="submit-btn">
+          <ion-button type="submit" color="primary">Purchase</ion-button>
+        </div>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</div>
+
+</ion-content>
